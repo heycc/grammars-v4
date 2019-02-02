@@ -838,6 +838,10 @@ insertStatementValue
         (',' '(' expressionsWithDefaults ')')*
     ;
 
+updatedElements
+    : updatedElement (',' updatedElement)*
+    ;
+
 updatedElement
     : fullColumnName '=' (expression | DEFAULT)
     ;
@@ -896,13 +900,13 @@ handlerCloseStatement
 
 singleUpdateStatement
     : UPDATE priority=LOW_PRIORITY? IGNORE? tableName (AS? uid)?
-      SET updatedElement (',' updatedElement)*
+      SET updatedElements
       (WHERE expression)? orderByClause? limitClause?
     ;
 
 multipleUpdateStatement
     : UPDATE priority=LOW_PRIORITY? IGNORE? tableSources
-      SET updatedElement (',' updatedElement)*
+      SET updatedElements
       (WHERE expression)?
     ;
 
